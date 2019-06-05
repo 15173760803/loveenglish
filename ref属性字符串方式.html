@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.16.8.6.js"></script>
+    <script src="js/react-dom.16.8.6.js"></script>
+    <script src="js/prop-types.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="demodiv"></div>
+
+    <script type="text/babel">
+       class MyCom extends React.Component{
+             constructor(props){
+                 super(props)
+                 this.fun=this.fun.bind(this);
+             }
+
+           fun(e){
+               console.log(this.refs.demoinput.value);
+           }
+           render(){
+               return(
+               <div>
+                   <input type="text" ref="demoinput" />
+                   <button onClick={this.fun}>点我</button>
+               </div>
+            
+               )
+           }
+
+
+       }   
+
+       ReactDOM.render(<MyCom/>,document.getElementById("demodiv")); 
+    </script>
+</body>
+</html>

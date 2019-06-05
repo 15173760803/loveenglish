@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.16.8.6.js"></script>
+    <script src="js/react-dom.16.8.6.js"></script>
+    <script src="js/prop-types.js"></script>
+    <script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="demodiv"></div>
+    
+    <script type="text/babel">
+        class MyCom extends React.Component{
+        constructor(props){
+            super(props)
+            this.state={
+                arr:[
+                    {tittle:"苹果",pirce:12},
+                    {tittle:"荔枝",pirce:22},
+                    {tittle:"香蕉",pirce:33},
+                    {tittle:"樱桃",pirce:44},
+                    {tittle:"车厘子",pirce:45}
+                ]
+            }
+        } 
+        
+        funa(){
+            console.log(this.inputval.value);
+            let inputdemo=this.inputval.value;
+            var newarr2=this.state.arr.filter((v,i)=>{
+                return inputdemo == v.tittle
+               
+            })
+
+            this.setState({
+                arr:newarr2
+            })
+        }
+
+
+        render(){
+          let newarr1=this.state.arr;
+          let newHtml=newarr1.map((v,i)=>{
+              return(
+                <tr key={i}>
+                   <td>{v.tittle}</td>
+                   <td>{v.pirce}</td>
+                </tr>
+              )
+          })
+ 
+           return(
+            <div>
+                <input type="text"  ref={(input)=>{this.inputval=input}}/>
+               <button onClick={()=>{this.funa()}}>搜索</button>
+
+           <table border="1">
+            <tbody>
+                <tr>
+                    <td>商品</td>
+                    <td>价格</td>
+                </tr>
+
+                 {newHtml}
+            </tbody>
+        </table>
+    </div>
+           )
+       }
+
+      }
+    ReactDOM.render(<MyCom/>,document.getElementById("demodiv"));
+    
+    
+    </script>
+</body>
+</html>

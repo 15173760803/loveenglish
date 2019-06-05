@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/react.16.8.6.js"></script>
+    <script src="js/react-dom.16.8.6.js"></script>
+    <script src="js/prop-types.js"></script>
+    <script src="js/babel.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+     *{
+         margin: 0px;
+         padding: 0px;
+     }
+     .div1{
+         width: 900px;
+         height: 900px;
+         margin: 0px auto;
+         border:1px solid black;
+         text-align: center;
+     }
+     .div1>h1{
+           text-align: center;
+           color:pink;
+
+     }
+     th{
+        text-align: center;
+     }
+    </style>
+</head>
+<body>
+    <div id="demodiv"></div>
+
+ 
+    <script type="text/babel">
+        
+        class XunHuan extends React.Component{
+            constructor(props){
+                super(props)
+                this.state={
+                    obj:[
+                      {name:"常娜",age:18},
+                      {name:"邹瓜瓜",age:35},
+                      {name:"哈哈",age:12}
+                    ],
+                    inputa:"",
+                    inputb:""
+            }
+         }
+
+
+
+            fun1=(e)=>{
+            
+              this.setState({
+                inputa:e.target.value
+              })
+          
+            }
+            fun2=(e)=>{
+            
+                this.setState({
+                inputb:e.target.value
+              })
+            }
+            add=()=>{
+               
+                let newobj=this.state.obj; 
+                this.setState({
+                obj:[...newobj,{name:this.state.inputa,age:this.state.inputb}]
+                })
+            
+            }
+            deletefun(eventa){
+                console.log(eventa);
+                let newobjx=this.state.obj;
+                var newobjy=newobjx.filter(function (v,i) {
+                    return eventa !=i;
+                })
+                this.setState({
+                    obj:newobjy
+                })
+            }
+            render(){
+
+                let newdata=this.state.obj;
+                let newHtml=newdata.map((v,i)=>{
+                    return(
+                        <tr key={i}>
+                            <td>{v.name}</td>
+                            <td>{v.age}</td>
+                            <td><button onClick={( )=>{this.deletefun(i)}}>删除</button></td>
+                        </tr>
+                    )
+                })
+                return(
+                    <div className="div1">
+                       <h1>表格添加</h1>
+                       <hr/>
+                    <div>
+                        请输入姓名：<input type="text" onChange={this.fun1}/>
+                        请输入年龄：<input type="text" onChange={this.fun2}/>
+                        <button onClick={this.add}>点我添加</button>
+                    </div>
+                      
+                      <table className="table table-bordered table-hover">
+                          <thead>
+                              <tr>
+                                  <th>姓名</th>
+                                  <th>年龄</th>
+                                  <th>删除</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            {newHtml}
+                          </tbody>
+                      </table>
+                      
+              
+
+
+                          
+                  </div>
+                )
+            }
+       
+        }
+
+        ReactDOM.render( <XunHuan/>,document.getElementById("demodiv"));
+    </script>
+</body>
+</html>
